@@ -5,79 +5,40 @@ import "/home/kamo/cv-creator/src/styles/form-styles.css";
 export default class Form extends React.Component{
     constructor(){
         super();
-        this.addDetails = this.addDetails.bind(this);
+        this.handleChangeInput = this.handleChangeInput.bind(this);
+
         this.state = {
-                        personalInformation: {
-                            firstName: "",
-                            lastName: "",
-                            phoneNumber: "",
-                            email: "",
-                            githubProfile: "",
-                            description: "",
-                        },
+                        firstName: "",
+                        lastName: "",
+                        phoneNumber: "",
+                        email: "",
+                        githubProfile: "",
+                        description: "",
+                
+                        position: "",
+                        company: "",
+                        yearJobStarted: "",
+                        yearJobEnded: "",
+                        jobDescription: "",
+                            
+                        institutionName: "",
+                        degree: "",
+                        yearCourseStarted: "",
+                        yearCourseEnded: "",
+                        courseDescription: "",
                        
-                        experiences: [
-                            {
-                                position: "",
-                                company: "",
-                                yearStarted: "",
-                                yearEnded: "",
-                            },
-                        ],
-                        
-                        educationHistory: [
-                            {
-                                institutionName: "",
-                                degree: "",
-                                yearStarted: "",
-                                yearEnded: ""
-                            },
-                        ],
-                        
                         skills: [
                             "",
-                        ]
+                        ], 
+
+                        languages: [],
                     }
     }
 
-    addDetails(e){
-        e.preventDefault();
-        console.log(e.target.parentElement.children[0].textContent)
-        switch(e.target.parentElement.children[0].textContent){
-            case "Education":
-                //console.log("fdfas")
-                this.setState({
-                    educationHistory: this.state.educationHistory.concat(
-                        {
-                            institutionName: "",
-                            degree: "",
-                            yearStarted: "",
-                            yearEnded: ""
-                    })
-                });
-                break;
-
-            case "Experience":
-                //console.log("hsdfa")
-                this.setState({
-                    experiences: this.state.experiences.concat(
-                        {
-                            position: "",
-                            company: "",
-                            yearStarted: "",
-                            yearEnded: "",
-                    })
-                });
-                break;
-
-            case "Skills":
-                this.setState({
-                    skills: this.state.skills.concat("")
-                })
-                break;
-            default:
-        }
-       //console.log(this.state)
+    handleChangeInput = (e) =>{
+        this.setState({
+            [e.target.name]: e.target.value,
+        });
     }
     
     render(){
@@ -85,58 +46,73 @@ export default class Form extends React.Component{
             <div id="app-container">
                 <div id="form-container">
                     <form id="cv-form">
-                        <fieldset>
-                            <legend>Personal Information</legend>
-                            <input type="text" placeholder="First Name" id="firstName"></input>
-                            <input type="text" placeholder="Last Name" id="lastName"></input>
-                            <input type="text" placeholder="Phone number" id="phoneNumber"></input>
-                            <input type="text" placeholder="Email" id="email"></input>
-                            <input type="text" placeholder="GitHub Profile" id="gitHubProfile"></input>
-                            <textarea placeholder="Tell your story. Try to keep it short!" id="description"></textarea>
-                        </fieldset>
-                        <fieldset>
-                            <legend>Experience</legend>
-                                {this.state.experiences.forEach((element)=>{
-                                        <div>
-                                            
-                                        </div>
-                                })}
-                            <input type="text" placeholder="Position" id="position"></input>
-                            <input type="text" placeholder="Company" id="company"></input>
-                            <input type="text" placeholder="Year started" id="yearStarted"></input>
-                            <input type="text" placeholder="Year ended" id="yearEnded"></input>
-                            <button className="btnAdd" onClick={this.addDetails}>Add</button>
-                        </fieldset>
-                        <fieldset>
-                            <legend>Education</legend>
-                            <input type="text" placeholder="Institution's name" id="institutionName"></input>
-                            <input type="text" placeholder="Degree" id="degree"></input>
-                            <input type="text" placeholder="Year started" id="yearStarted"></input>
-                            <input type="text" placeholder="Year ended" id="yearEnded"></input>
-                            <button className="btnAdd" onClick={this.addDetails}>Add</button>
-                        </fieldset>
-                        <fieldset>
-                            <legend>Skills</legend>
-                            <input type="text" placeholder="Skill" className="skills"></input>
-                            <button className="btnAdd" onClick={this.addDetails}>Add</button>
-                        </fieldset>
+                        {this.personalInfoUI()}
+                        {this.experienceUI()}
+                        {this.educationUI()}
+                        {this.skillsUI()}
+                        {this.languagesUI()}
                     </form>
                 </div>
-                <CV/>
+                <CV cvInformation={this.state}/>
             </div>
-            
+        );
+    }
+
+    personalInfoUI(){
+        return(
+            <fieldset>
+                <legend>Personal Information</legend>
+                <input type="text" placeholder="First Name" name="firstName" onChange={this.handleChangeInput} value={this.state.firstName}></input>
+                <input type="text" placeholder="Last Name" name="lastName" onChange={this.handleChangeInput}></input>
+                <input type="text" placeholder="Phone number" name="phoneNumber" onChange={this.handleChangeInput}></input>
+                <input type="text" placeholder="Email" name="email" onChange={this.handleChangeInput}></input>
+                <input type="text" placeholder="GitHub Profile" name="githubProfile" onChange={this.handleChangeInput}></input>
+                <textarea placeholder="Tell your story. Try to keep it short!" name="description" onChange={this.handleChangeInput}></textarea>
+            </fieldset>
+        );
+    }
+    
+    experienceUI(){
+        return(
+            <fieldset>
+                <legend>Experience</legend>
+                <input type="text" placeholder="Position" name="position" onChange={this.handleChangeInput}></input>
+                <input type="text" placeholder="Company" name="company" onChange={this.handleChangeInput}></input>
+                <input type="text" placeholder="Year started" name="yearJobStarted" onChange={this.handleChangeInput}></input>
+                <input type="text" placeholder="Year ended" name="yearJobEnded" onChange={this.handleChangeInput}></input>
+                <textarea placeholder="Describe your role" name="jobDescription" onChange={this.handleChangeInput}></textarea>
+            </fieldset> 
+        );
+    }
+    
+    educationUI(){
+        return(
+            <fieldset>
+                <legend>Education</legend>
+                <input type="text" placeholder="Institution's name" name="institutionName" onChange={this.handleChangeInput}></input>
+                <input type="text" placeholder="Degree" name="degree" onChange={this.handleChangeInput}></input>
+                <input type="text" placeholder="Year started" name="yearCourseStarted" onChange={this.handleChangeInput}></input>
+                <input type="text" placeholder="Year ended" name="yearCourseEnded" onChange={this.handleChangeInput}></input>
+                <textarea placeholder="Describe what you learned" name="courseDescription" onChange={this.handleChangeInput}></textarea>
+            </fieldset>
+        );
+    }
+    
+    skillsUI(){
+        return(
+            <fieldset>
+                <legend>Skills</legend>
+                <input type="text" placeholder="Skill" className="skills"></input>
+            </fieldset>
+        );
+    }
+
+    languagesUI(){
+        return(
+            <fieldset>
+                <legend>Languages</legend>
+                <input type="text" placeholder="Programming language"></input>
+            </fieldset>
         );
     }
 }
-
-// function addExperience(){
-//     return(
-//         <div id="sectionContainer">
-//             <input type="text" placeholder="Position" id="position"></input>
-//             <input type="text" placeholder="Company" id="company"></input>
-//             <input type="text" placeholder="Year started" id="yearStarted"></input>
-//             <input type="text" placeholder="Year ended" id="yearEnded"></input>
-//             <button className="btnAdd" onClick={this.addDetails}>Add</button>
-//         </div>  
-//     ) 
-// }
