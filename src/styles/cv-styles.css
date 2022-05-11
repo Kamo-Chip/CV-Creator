@@ -1,10 +1,13 @@
 #cv{
-    height: 100vh;
+    height: fit-content;
     width: 50vw;
     border-style: solid;
     display: grid;
-    grid-template-columns: 3fr 1fr;
+    grid-template-columns: 2fr 1fr;
+    padding-bottom: 1em;
 }
+
+/*Main container section styling*/
 
 #main-container{
     display: flex;
@@ -12,11 +15,25 @@
     align-items: center;
 }
 
-#description{
+#selfDescription{
     width: 95%; 
     height: 20%;
     border-style: solid;
+    margin-top: 1em;
+    word-wrap: break-word;
+    overflow: hidden;
 }
+
+#selfDescription p{
+    margin: 0;
+    padding: .5em;
+    word-wrap: break-word;
+    height: 100%;
+    
+}
+
+
+/*Details section styling*/
 
 #details-container{
     margin-top: 1em;
@@ -32,9 +49,9 @@ h1{
     font-size: 1.5rem;
 }
 
-#experience{
+#info{
     margin-top: 1em;
-    height: 33%;
+    height: fit-content;
     border-style: solid;
     padding: 0 1em 2em 1em;
 }
@@ -60,10 +77,71 @@ h1{
     margin-left: 2em;
 }
 
+/*Sidebar styling*/
+
 #sidebar{
     border-style: solid;
     margin: 1em 1em 1em 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 100%;
+    font-size: 2rem;
 }
+
+#header{
+    height: fit-content;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    /* align-items: center; */
+}
+
+#image{
+    height: 10rem;
+    width: 10rem;
+    border-style: solid;
+    border-radius: 50%;
+    margin: 1em 0 0 1em;
+}
+
+#name{
+    height: 8rem;
+    width: 100%;
+    border-style: solid;
+    margin: .4em;
+}
+
+#name p{
+    margin: 0;
+}
+
+#personal-info, #languages-container{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    font-size: 1.5rem;
+}
+
+#contact-details{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    height: 3rem;
+    margin-bottom: 1em;
+    border-style: solid;
+}
+
+#contact-details p{
+    width: 90%;
+    margin: 0;
+}
+
+#contact-details img{
+    height: 2.5rem;
+}
+
 *{
     box-sizing: border-box;
 }

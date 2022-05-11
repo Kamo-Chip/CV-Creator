@@ -35,6 +35,10 @@ input{
     height: 2.5rem;
 }
 
+textarea{
+    margin-top: 1em;
+    height: 4rem;
+}
 input, #description{
     font-size: 1rem;
     margin-top: 1em;
@@ -49,9 +53,4 @@ input, #description{
 
 #description{
     height: 5rem;
-}
-
-#sectionContainer{
-    display: flex;
-    flex-direction: column;
 }
