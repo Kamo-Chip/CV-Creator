@@ -27,9 +27,7 @@ export default class Form extends React.Component{
                         yearCourseEnded: "",
                         courseDescription: "",
                        
-                        skills: [
-                            "",
-                        ], 
+                        skills: [],
 
                         languages: [],
                     }
@@ -40,11 +38,24 @@ export default class Form extends React.Component{
             [e.target.name]: e.target.value,
         });
     }
+
+    handleAdd = (e) =>{
+        e.preventDefault();
+        const target = e.target.parentElement.children[1];
+        const name = target.name;
+        
+        this.setState({
+           [target.name]: this.state[name].concat(target.value)
+        })
+        target.value = "";
+    }
+    
     
     render(){
         return (
             <div id="app-container">
                 <div id="form-container">
+                    <p>Enter your details</p>
                     <form id="cv-form">
                         {this.personalInfoUI()}
                         {this.experienceUI()}
@@ -64,9 +75,9 @@ export default class Form extends React.Component{
                 <legend>Personal Information</legend>
                 <input type="text" placeholder="First Name" name="firstName" onChange={this.handleChangeInput} value={this.state.firstName}></input>
                 <input type="text" placeholder="Last Name" name="lastName" onChange={this.handleChangeInput}></input>
-                <input type="text" placeholder="Phone number" name="phoneNumber" onChange={this.handleChangeInput}></input>
-                <input type="text" placeholder="Email" name="email" onChange={this.handleChangeInput}></input>
-                <input type="text" placeholder="GitHub Profile" name="githubProfile" onChange={this.handleChangeInput}></input>
+                <input type="tel" placeholder="Phone number" name="phoneNumber" onChange={this.handleChangeInput}></input>
+                <input type="email" placeholder="Email" name="email" onChange={this.handleChangeInput}></input>
+                <input type="url" placeholder="GitHub Profile" name="githubProfile" onChange={this.handleChangeInput}></input>
                 <textarea placeholder="Tell your story. Try to keep it short!" name="description" onChange={this.handleChangeInput}></textarea>
             </fieldset>
         );
@@ -78,8 +89,8 @@ export default class Form extends React.Component{
                 <legend>Experience</legend>
                 <input type="text" placeholder="Position" name="position" onChange={this.handleChangeInput}></input>
                 <input type="text" placeholder="Company" name="company" onChange={this.handleChangeInput}></input>
-                <input type="text" placeholder="Year started" name="yearJobStarted" onChange={this.handleChangeInput}></input>
-                <input type="text" placeholder="Year ended" name="yearJobEnded" onChange={this.handleChangeInput}></input>
+                <input type="text" placeholder="From" name="yearJobStarted" onChange={this.handleChangeInput}></input>
+                <input type="text" placeholder="To" name="yearJobEnded" onChange={this.handleChangeInput}></input>
                 <textarea placeholder="Describe your role" name="jobDescription" onChange={this.handleChangeInput}></textarea>
             </fieldset> 
         );
@@ -89,10 +100,10 @@ export default class Form extends React.Component{
         return(
             <fieldset>
                 <legend>Education</legend>
-                <input type="text" placeholder="Institution's name" name="institutionName" onChange={this.handleChangeInput}></input>
                 <input type="text" placeholder="Degree" name="degree" onChange={this.handleChangeInput}></input>
+                <input type="text" placeholder="Institution's name" name="institutionName" onChange={this.handleChangeInput}></input>
                 <input type="text" placeholder="Year started" name="yearCourseStarted" onChange={this.handleChangeInput}></input>
-                <input type="text" placeholder="Year ended" name="yearCourseEnded" onChange={this.handleChangeInput}></input>
+                <input type="text" placeholder="Year completed" name="yearCourseEnded" onChange={this.handleChangeInput}></input>
                 <textarea placeholder="Describe what you learned" name="courseDescription" onChange={this.handleChangeInput}></textarea>
             </fieldset>
         );
@@ -102,7 +113,8 @@ export default class Form extends React.Component{
         return(
             <fieldset>
                 <legend>Skills</legend>
-                <input type="text" placeholder="Skill" className="skills"></input>
+                <input type="text" name="skills" placeholder="List skills in a comma separated list"></input>
+                <button onClick={this.handleAdd}>Add</button>
             </fieldset>
         );
     }
@@ -111,7 +123,8 @@ export default class Form extends React.Component{
         return(
             <fieldset>
                 <legend>Languages</legend>
-                <input type="text" placeholder="Programming language"></input>
+                <input type="text" name="languages" placeholder="List the programming languages in a comma seperated list"></input>
+                <button onClick={this.handleAdd}>Add</button>
             </fieldset>
         );
     }
