@@ -1,10 +1,14 @@
 #cv{
     height: fit-content;
+    min-height: 90vh;
     width: 50vw;
     border-style: solid;
     display: grid;
     grid-template-columns: 2fr 1fr;
     padding-bottom: 1em;
+    background-color: #fff;
+    color: #000;
+    font-family: arial;
 }
 
 /*Main container section styling*/
@@ -15,7 +19,7 @@
     align-items: center;
 }
 
-#selfDescription{
+#self-description{
     width: 95%; 
     height: 20%;
     border-style: solid;
@@ -24,12 +28,11 @@
     overflow: hidden;
 }
 
-#selfDescription p{
+#self-description p{
     margin: 0;
     padding: .5em;
     word-wrap: break-word;
     height: 100%;
-    
 }
 
 
@@ -37,7 +40,6 @@
 
 #details-container{
     margin-top: 1em;
-    height: 80%;
     width: 95%;
     display: flex;
     flex-direction: column;
@@ -65,10 +67,16 @@ h1{
     border-style: solid;
 }
 
+#date-container{
+    width: 15%;
+    display: flex;
+    flex-direction: column;
+}
+
 #date{
     height: 2rem;
-    width: 15%;
     border-style: solid;
+    margin-top: .2em;
 }
 
 #explanation{
@@ -86,7 +94,8 @@ h1{
     flex-direction: column;
     align-items: center;
     max-width: 100%;
-    font-size: 2rem;
+    background-color: #bb86fc;
+    color: #000;
 }
 
 #header{
@@ -94,6 +103,7 @@ h1{
     width: 100%;
     display: flex;
     flex-direction: row;
+    font-size: 2.5rem;
     /* align-items: center; */
 }
 
@@ -141,6 +151,17 @@ h1{
 #contact-details img{
     height: 2.5rem;
 }
+
+#languages-container ul{
+    list-style: none;
+}
+
+#language-display{
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between
+}
+/*Miscellaneous*/
 
 *{
     box-sizing: border-box;
