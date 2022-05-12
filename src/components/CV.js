@@ -6,27 +6,29 @@ import emailIcon from "/home/kamo/cv-creator/src/email.png";
 
 export default class CV extends React.Component{
     render(){
-        console.log(this.props);
         const {
             firstName, lastName, phoneNumber, email, githubProfile, description,
             position, company, yearJobStarted, yearJobEnded, jobDescription,
             institutionName, degree, yearCourseStarted, yearCourseEnded, courseDescription,
             skills, languages}  = this.props.cvInformation;
-        //console.log(this.props.cvInformation.firstName)
-        console.log(githubProfile);
+
         return(
             <div id="cv">
                 <div id="main-container">
-                    <div id="selfDescription">
+                    <div id="self-description">
                         <p>{description}</p>
                     </div>
                     <div id="details-container">
                         <div id="info">
                             <h1>Experience</h1>
                             <div id="details">
-                                <div id="date">{yearJobStarted} - {yearJobEnded}</div>
+                            <div id="date-container">
+                                    <div id="date">{yearJobStarted}</div>
+                                    <div id="date">{yearJobEnded}</div>
+                                </div>
                                 <div id="explanation">
-                                    <p>{position} at {company}</p>
+                                    <p>{position}</p>
+                                    <p>{company}</p>
                                     <p>{jobDescription}</p>
                                 </div>
                             </div>
@@ -34,9 +36,13 @@ export default class CV extends React.Component{
                         <div id="info">
                             <h1>Education</h1>
                             <div id="details">
-                                <div id="date">{yearCourseStarted} - {yearCourseEnded}</div>
+                                <div id="date-container">
+                                    <div id="date">{yearCourseStarted}</div>
+                                    <div id="date">{yearCourseEnded}</div>
+                                </div>
                                 <div id="explanation">
-                                    <p>{degree} at {institutionName}</p>
+                                    {(degree) !== "" && 
+                                    <p>{degree}, {institutionName}</p>}
                                     <p>{courseDescription}</p>
                                 </div>
                             </div>
@@ -44,7 +50,11 @@ export default class CV extends React.Component{
                         <div id="info">
                             <h1>Skills</h1>
                             <div id="details">
-
+                                <ul>
+                                    {skills.map((skill)=>{
+                                        return <li>{skill}</li>
+                                    })}
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -72,7 +82,16 @@ export default class CV extends React.Component{
                     </div>
                     <div id="languages-container">
                         <p>Languages</p>
-                        {/*Render list*/}
+                        <ul>
+                            {languages.map((element)=>{
+                                return <li>
+                                    <div id="language-display">
+                                        <img height="50px" src={`https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${element.toLowerCase()}/${element.toLowerCase()}-original.svg`} alt="logo for language"/>
+                                        <p>{element}</p>
+                                    </div>
+                                </li>
+                            })}
+                        </ul>
                     </div>
                 </div>
             </div>
