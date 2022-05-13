@@ -1,17 +1,54 @@
 #cv{
-    height: fit-content;
-    min-height: 90vh;
+    min-height: fit-content;
+    height: 100vh;
     width: 50vw;
-    border-style: solid;
     display: grid;
     grid-template-columns: 2fr 1fr;
-    padding-bottom: 1em;
     background-color: #fff;
     color: #000;
     font-family: arial;
+  
 }
 
+
+#cv-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 /*Main container section styling*/
+
+#themes{
+    display: flex;
+    flex-direction: row;
+}
+.colour{
+    height: 2rem;
+    width: 2rem;
+    border-style: none;
+    border-radius: 50%;
+    margin: 0 0 1em .5em;
+}
+
+.colour:hover{
+    transform: scale(1.2);
+}
+
+#red{
+    background-color: #cf6679;
+}
+
+#teal{
+    background-color: #03dac6;
+}
+
+#blue{
+    background-color: #3358fa;
+}
+
+#purple{
+    background-color: #bb86fc;
+}
 
 #main-container{
     display: flex;
@@ -21,11 +58,11 @@
 
 #self-description{
     width: 95%; 
-    height: 20%;
-    border-style: solid;
+    height: 15%;
     margin-top: 1em;
     word-wrap: break-word;
     overflow: hidden;
+    font-size: 1rem;
 }
 
 #self-description p{
@@ -39,32 +76,26 @@
 /*Details section styling*/
 
 #details-container{
-    margin-top: 1em;
-    width: 95%;
-    display: flex;
-    flex-direction: column;
+
+    width: 100%;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
 }
 
-h1{
-    margin: 0 0 .5em 0;
-    height: 10%;
-    font-size: 1.5rem;
-}
-
-#info{
-    margin-top: 1em;
+#info h1{
+    margin: 0;
+    padding-left: .5em;
     height: fit-content;
-    border-style: solid;
-    padding: 0 1em 2em 1em;
+    font-size: 1.5rem;
+    width: 100%;
+    background-color: #825caf;
+    color: #fff;
 }
 
 #details{
-    
     padding: 1em;
-    height: 90%;
     display: flex;
     flex-direction: row;
-    border-style: solid;
 }
 
 #date-container{
@@ -75,27 +106,35 @@ h1{
 
 #date{
     height: 2rem;
-    border-style: solid;
     margin-top: .2em;
 }
 
 #explanation{
     width: 75%;
-    border-style: solid;
     margin-left: 2em;
+    padding: 0 .5em;
+}
+
+#explanation p{
+    margin: none;
+}
+
+#cv-position{
+    font-weight: bold;
 }
 
 /*Sidebar styling*/
 
 #sidebar{
-    border-style: solid;
-    margin: 1em 1em 1em 0;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     max-width: 100%;
     background-color: #bb86fc;
     color: #000;
+    border-left: solid #000;
+    border-width: 1px;
 }
 
 #header{
@@ -104,7 +143,6 @@ h1{
     display: flex;
     flex-direction: row;
     font-size: 2.5rem;
-    /* align-items: center; */
 }
 
 #image{
@@ -116,12 +154,16 @@ h1{
 }
 
 #name{
-    height: 8rem;
+    display: grid;
+    grid-template-rows: 1fr .5fr;
     width: 100%;
-    border-style: solid;
     margin: .4em;
 }
 
+#application-title{
+    font-size: 1.5rem;
+    color:rgb(31, 31, 31);
+}
 #name p{
     margin: 0;
 }
@@ -129,8 +171,17 @@ h1{
 #personal-info, #languages-container{
     display: flex;
     flex-direction: column;
-    width: 90%;
+    width: 100%;
     font-size: 1.5rem;
+}
+
+#section-header{
+    width: 100%;
+    height: 2.5rem;
+    background-color: #825caf;
+    font-size: 1.5rem;
+    padding-left: .2em;
+    box-sizing: border-box;
 }
 
 #contact-details{
@@ -140,7 +191,6 @@ h1{
     width: 100%;
     height: 3rem;
     margin-bottom: 1em;
-    border-style: solid;
 }
 
 #contact-details p{
@@ -150,6 +200,12 @@ h1{
 
 #contact-details img{
     height: 2.5rem;
+    margin-right: .2em;
+}
+
+#contact-container{
+    width: 90%;
+    align-self: center;
 }
 
 #languages-container ul{
@@ -159,10 +215,42 @@ h1{
 #language-display{
     display: flex;
     flex-direction: row;
-    justify-content:space-between
+}
+
+#language-display p{
+    width: 100%;
+    text-align: right;
+    margin-right: 1em;
+}
+
+#language-display img{
+    height: 60px;
+}
+
+#email-address{
+  font-size: 1.2rem;
 }
 /*Miscellaneous*/
 
-*{
+#cv-title{
+    text-align: center;
+    margin: 0;
+}
+
+#download{
+    height: fit-content;
+    width: fit-content;
+    margin-bottom: 1rem;
     box-sizing: border-box;
+}
+
+@media screen and (max-width: 768px){
+    #cv{
+        width: 90vw;
+        height: fit-content;
+    }
+
+    #section-header{
+        height: fit-content;
+    }
 }
