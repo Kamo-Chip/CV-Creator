@@ -5,13 +5,13 @@
     height: 100vh;
 }
 
+
 #form-container{
     display: flex;
     flex-direction: column;
     align-items: center;
     height: 90vh;
     width: 40vw;
-    /* border-style: solid; */
     padding: .5em;
     overflow-y: auto;
 }
@@ -34,24 +34,47 @@ legend{
 
 input{
     height: 2.5rem;
+    border-style: solid;
+    border-width: .1px;
 }
 
 textarea{
     margin-top: 1em;
-    height: 4rem;
+    height: 5rem;
+    font-size: 1rem;
 }
 input, #description{
     font-size: 1rem;
     margin-top: 1em;
 }
 
-.btnAdd{
-    height: 2.5rem;
+button{
+    height: fit-content;
     width: 10rem;
     font-size: 1.5rem;
     margin-top: .5em;
+    background-color: #bb86fc;
+    border: none;
 }
 
+button:hover{
+    background-color: #a363f1;
+}
 #description{
     height: 5rem;
+}
+
+@media screen and (max-width:768px){
+    #app-container{
+        display: grid;
+        grid-template-rows: 1fr 1fr;
+        height: fit-content;
+        overflow-y: auto;
+    }
+
+    #form-container{
+        width: 80vw;
+        overflow:unset;
+        justify-self: center;
+    }
 }
