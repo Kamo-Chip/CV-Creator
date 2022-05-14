@@ -55,6 +55,7 @@ button{
     margin-top: .5em;
     background-color: #bb86fc;
     border: none;
+    color: #000;
 }
 
 button:hover{
@@ -72,7 +73,7 @@ button:hover{
     }
 
     #form-container{
-        width: 80vw;
+        width: 90vw;
         justify-self: center;
         overflow: unset;
         height: fit-content;
