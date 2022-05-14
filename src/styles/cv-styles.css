@@ -253,6 +253,9 @@
         height: fit-content;
     }
 
+    #contact-details{
+        margin-left: .5em;
+    }
     #contact-details img{
         height: 30px;
     }
@@ -289,5 +292,9 @@
 
     #info h1{
         box-sizing: border-box;
+    }
+
+    #contact-details{
+        margin-left: .5em;
     }
 }

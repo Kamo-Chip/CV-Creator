@@ -154,7 +154,7 @@ export default class Form extends React.Component{
         return(
             <fieldset onFocus={styleFieldset} onBlur={removeStyleFieldset}>
                 <legend>Languages</legend>
-                <input type="text" name="languages" placeholder="Type skill then click add"></input>
+                <input type="text" name="languages" placeholder="Type language then click add"></input>
                 <button onClick={this.handleAdd}>Add</button>
             </fieldset>
         );
