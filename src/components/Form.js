@@ -105,7 +105,7 @@ export default class Form extends React.Component{
                 <legend>Personal Info</legend>
                 <input type="text" placeholder="First Name" name="firstName" onChange={this.handleChangeInput} value={this.state.firstName}></input>
                 <input type="text" placeholder="Last Name" name="lastName" onChange={this.handleChangeInput} value={this.state.lastName}></input>
-                <input type="text" placeholder="Applying for" name="applicationTitle" onChange={this.handleChangeInput} value={this.state.lastName}></input>
+                <input type="text" placeholder="Applying for" name="applicationTitle" onChange={this.handleChangeInput} value={this.state.applicationTitle}></input>
                 <input type="tel" placeholder="Phone number" name="phoneNumber" onChange={this.handleChangeInput} value={this.state.phoneNumber}></input>
                 <input type="email" placeholder="Email" name="email" onChange={this.handleChangeInput} value={this.state.email}></input>
                 <input type="url" placeholder="GitHub Profile" name="githubProfile" onChange={this.handleChangeInput} value={this.state.githubProfile}></input>
