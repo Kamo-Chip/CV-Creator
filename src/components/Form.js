@@ -144,7 +144,7 @@ export default class Form extends React.Component{
         return(
             <fieldset onFocus={styleFieldset} onBlur={removeStyleFieldset}>
                 <legend>Skills</legend>
-                <input type="text" name="skills" placeholder="List skills in a comma separated list"></input>
+                <input type="text" name="skills" placeholder="Type skill then click add"></input>
                 <button onClick={this.handleAdd}>Add</button>
             </fieldset>
         );
@@ -154,7 +154,7 @@ export default class Form extends React.Component{
         return(
             <fieldset onFocus={styleFieldset} onBlur={removeStyleFieldset}>
                 <legend>Languages</legend>
-                <input type="text" name="languages" placeholder="List the programming languages in a comma seperated list"></input>
+                <input type="text" name="languages" placeholder="Type skill then click add"></input>
                 <button onClick={this.handleAdd}>Add</button>
             </fieldset>
         );
