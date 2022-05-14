@@ -14,12 +14,7 @@ export default class CV extends React.Component{
 
         return(
             <div id="cv-container">
-                <div id="themes">
-                    <div className ="colour" id="red" onClick={styleForm}></div>
-                    <div className ="colour" id="teal" onClick={styleForm}></div>
-                    <div className ="colour" id="blue" onClick={styleForm}></div>
-                    <div className ="colour" id="purple" onClick={styleForm}></div>
-                </div>
+                
                 <div id="cv">
                     <div id="main-container">
                         <div id="self-description">
@@ -114,7 +109,12 @@ export default class CV extends React.Component{
                     </div>
                     
                 </div>
-                
+                <div id="themes">
+                    <div className ="colour" id="red" onClick={styleForm}></div>
+                    <div className ="colour" id="teal" onClick={styleForm}></div>
+                    <div className ="colour" id="blue" onClick={styleForm}></div>
+                    <div className ="colour" id="purple" onClick={styleForm}></div>
+                </div>
                 <button id="download">Download PDF</button>
             </div>
         )
