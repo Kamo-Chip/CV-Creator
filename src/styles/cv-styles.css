@@ -1,13 +1,12 @@
 #cv{
-    min-height: fit-content;
-    height: 100vh;
+    height: fit-content;
     width: 50vw;
     display: grid;
     grid-template-columns: 2fr 1fr;
     background-color: #fff;
     color: #000;
     font-family: arial;
-  
+    min-height: 90vh;
 }
 
 
@@ -15,12 +14,14 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 100%;
 }
 /*Main container section styling*/
 
 #themes{
     display: flex;
     flex-direction: row;
+    margin-top: 1em;
 }
 .colour{
     height: 2rem;
@@ -54,6 +55,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 100%;
 }
 
 #self-description{
@@ -182,6 +184,7 @@
     font-size: 1.5rem;
     padding-left: .2em;
     box-sizing: border-box;
+    margin: 0;
 }
 
 #contact-details{
@@ -246,11 +249,45 @@
 
 @media screen and (max-width: 768px){
     #cv{
-        width: 90vw;
+        width: 95vw;
         height: fit-content;
+    }
+
+    #contact-details img{
+        height: 30px;
+    }
+
+    #contact-container{
+        align-self: flex-start;
+    }
+    
+    #email-address{
+        font-size: 1rem;
+    }
+    #personal-info{
+        font-size: 1rem;
+    }
+
+    #languages-container{
+        font-size: 1rem;
+    }
+
+    #language-display img{
+        height: 50px;
     }
 
     #section-header{
         height: fit-content;
+    }
+}
+
+@media screen and (max-width: 425px){
+    #cv{
+        display: flex;
+        flex-direction: column-reverse;
+    }
+
+    #info h1{
+        box-sizing: border-box;
     }
 }
