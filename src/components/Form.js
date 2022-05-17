@@ -1,8 +1,57 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CV from "./CV";
+import Experience from "./Experience";
+import PersonalDetails from "./PersonalDetails";
+import Education from "./Education";
 import "/home/kamo/cv-creator/src/styles/form-styles.css";
+import { styleFieldset, removeStyleFieldset } from "/home/kamo/cv-creator/src/utils/utils.js";
+import Skills from "./Skills";
 
-export default class Form extends React.Component{
+
+function Formf(){
+    const [ personalDetails, setPersonalDetails ] = useState({
+        firstName: "",
+        lastName: "",
+        applicationTitle: "",
+        phoneNumber: "",
+        email: "",
+        githubProfile: "",
+        description: "",
+
+        position: "",
+        company: "",
+        yearJobStarted: "",
+        yearJobEnded: "",
+        jobDescription: "",
+            
+        institutionName: "",
+        degree: "",
+        yearCourseStarted: "",
+        yearCourseEnded: "",
+        courseDescription: "",
+       
+        skills: [],
+
+        languages: [],
+    });
+    return (
+        <div id="app-container">
+            <div id="form-container">
+                <form id="cv-form">
+                    <PersonalDetails/>
+                    <Experience/>
+                    <Education/>
+                    <Skills/>
+                </form>
+                
+                {/* <button onClick={this.exampleOnclick}>Load example</button> */}
+            </div>
+        {/* <CV cvInformation={personalDetails}/> */}
+    </div>       
+    )
+}
+
+class Form extends React.Component{
     constructor(){
         super();
         this.handleChangeInput = this.handleChangeInput.bind(this);
@@ -99,20 +148,7 @@ export default class Form extends React.Component{
         );
     }
 
-    personalInfoUI(){
-        return(
-            <fieldset onFocus={styleFieldset} onBlur={removeStyleFieldset}>
-                <legend>Personal Info</legend>
-                <input type="text" placeholder="First Name" name="firstName" onChange={this.handleChangeInput} value={this.state.firstName}></input>
-                <input type="text" placeholder="Last Name" name="lastName" onChange={this.handleChangeInput} value={this.state.lastName}></input>
-                <input type="text" placeholder="Applying for" name="applicationTitle" onChange={this.handleChangeInput} value={this.state.applicationTitle}></input>
-                <input type="tel" placeholder="Phone number" name="phoneNumber" onChange={this.handleChangeInput} value={this.state.phoneNumber}></input>
-                <input type="email" placeholder="Email" name="email" onChange={this.handleChangeInput} value={this.state.email}></input>
-                <input type="url" placeholder="GitHub Profile" name="githubProfile" onChange={this.handleChangeInput} value={this.state.githubProfile}></input>
-                <textarea placeholder="Tell your story. Try to keep it short!" name="description" onChange={this.handleChangeInput} value={this.state.description}></textarea>
-            </fieldset>
-        );
-    }
+    
     
     experienceUI(){
         return(
@@ -161,11 +197,21 @@ export default class Form extends React.Component{
     }
 }
 
-
-function styleFieldset(e){
-    e.target.parentElement.children[0].style.textDecoration = "underline";
+function personalInfoUI(personalDetails, handler){
+    return(
+        <fieldset onFocus={styleFieldset} onBlur={removeStyleFieldset}>
+            <legend>Personal Info</legend>
+            <input type="text" placeholder="First Name" name="firstName" onChange={handler} value={personalDetails.firstName}></input>
+            <input type="text" placeholder="Last Name" name="lastName" onChange={handler} value={personalDetails.lastName}></input>
+            <input type="text" placeholder="Applying for" name="applicationTitle" onChange={handler} value={personalDetails.applicationTitle}></input>
+            <input type="tel" placeholder="Phone number" name="phoneNumber" onChange={handler} value={personalDetails.phoneNumber}></input>
+            <input type="email" placeholder="Email" name="email" onChange={handler} value={personalDetails.email}></input>
+            <input type="url" placeholder="GitHub Profile" name="githubProfile" onChange={handler} value={personalDetails.githubProfile}></input>
+            <textarea placeholder="Tell your story. Try to keep it short!" name="description" onChange={handler} value={personalDetails.description}></textarea>
+        </fieldset>
+    );
 }
 
-function removeStyleFieldset(e){
-    e.target.parentElement.children[0].style.textDecoration = "none";
-}
+
+
+export {Form, Formf}
