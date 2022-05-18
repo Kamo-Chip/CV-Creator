@@ -6,34 +6,10 @@ import Education from "./Education";
 import "/home/kamo/cv-creator/src/styles/form-styles.css";
 import { styleFieldset, removeStyleFieldset } from "/home/kamo/cv-creator/src/utils/utils.js";
 import Skills from "./Skills";
+import Language from "./Languages";
 
-
+//Add state to form
 function Formf(){
-    const [ personalDetails, setPersonalDetails ] = useState({
-        firstName: "",
-        lastName: "",
-        applicationTitle: "",
-        phoneNumber: "",
-        email: "",
-        githubProfile: "",
-        description: "",
-
-        position: "",
-        company: "",
-        yearJobStarted: "",
-        yearJobEnded: "",
-        jobDescription: "",
-            
-        institutionName: "",
-        degree: "",
-        yearCourseStarted: "",
-        yearCourseEnded: "",
-        courseDescription: "",
-       
-        skills: [],
-
-        languages: [],
-    });
     return (
         <div id="app-container">
             <div id="form-container">
@@ -41,9 +17,9 @@ function Formf(){
                     <PersonalDetails/>
                     <Experience/>
                     <Education/>
+                    <Language/>
                     <Skills/>
                 </form>
-                
                 {/* <button onClick={this.exampleOnclick}>Load example</button> */}
             </div>
         {/* <CV cvInformation={personalDetails}/> */}
