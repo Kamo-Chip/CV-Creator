@@ -10,14 +10,13 @@ export default function PersonalDetails() {
          phoneNumber: "", 
          email: "", 
          githubProfile:"", 
-         description: ""}
-         );
+         description: ""});
          
     function handleChange(e){
         const inputSource = e.target.name;
         setPersonalDetails({ ...personalDetails, [inputSource]: e.target.value });
     }
-    console.log(personalDetails)
+    
     return (
         <fieldset onFocus={styleFieldset} onBlur={removeStyleFieldset}>
             <legend>Personal Info</legend>
