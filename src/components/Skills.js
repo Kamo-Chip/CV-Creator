@@ -6,6 +6,7 @@ export default function Skills(){
     function addToList(e){
         e.preventDefault();
         setSkills(skills.concat(e.target.parentElement.children[1].value));
+        e.target.parentElement.children[1].value = "";
     }
 
     function removeFromList(e){
@@ -15,13 +16,11 @@ export default function Skills(){
 
         for(let i = 0; i < skills.length; i++){
             if(skills[i] === e.target.parentElement.children[0].textContent)continue;
-            updatedSkills[i] = skills[i];
+            updatedSkills.push(skills[i]);
         }
 
         setSkills(updatedSkills);
     }
-
-    console.log(skills);
 
     return (
         <fieldset>
