@@ -1,9 +1,9 @@
 import React from "react";
 
-export default class Header{
+export default class Header extends React.Component{
     render(){
         return(
-            <div>
+            <div id="header1">
                 <h1>CV Creator</h1>
             </div>
         );

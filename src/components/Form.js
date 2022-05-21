@@ -1,193 +1,283 @@
-import React, { useEffect, useState } from "react";
 import CV from "./CV";
-import Experience from "./Experience";
-import PersonalDetails from "./PersonalDetails";
-import Education from "./Education";
-import "/home/kamo/cv-creator/src/styles/form-styles.css";
-import { styleFieldset, removeStyleFieldset } from "/home/kamo/cv-creator/src/utils/utils.js";
-import Skills from "./Skills";
-import Language from "./Languages";
+import "../styles/form-styles.css";
+import React, { useState } from "react";
 
-//Add state to form
-function Formf(){
-    return (
-        <div id="app-container">
-            <div id="form-container">
-                <form id="cv-form">
-                    <PersonalDetails/>
-                    <Experience/>
-                    <Education/>
-                    <Language/>
-                    <Skills/>
-                </form>
-                {/* <button onClick={this.exampleOnclick}>Load example</button> */}
-            </div>
-        {/* <CV cvInformation={personalDetails}/> */}
-    </div>       
-    )
-}
+export default function Form(){
+    const [ userDetails, setUserDetails ] = 
+    useState({
+            firstName: "",
+            lastName: "",
+            applicationTitle: "", 
+            phoneNumber: "", 
+            email: "", 
+            githubProfile:"", 
+            description: "",
+            
+            experiences:
+            [
+                {
+                    position: "",
+                    company: "",
+                    yearJobStarted: "",
+                    yearJobEnded: "",
+                    jobDescription: "",
+                }
+            ],
 
-class Form extends React.Component{
-    constructor(){
-        super();
-        this.handleChangeInput = this.handleChangeInput.bind(this);
-        this.exampleOnclick = this.exampleOnclick.bind(this);
-        this.state = {
-                        firstName: "",
-                        lastName: "",
-                        applicationTitle: "",
-                        phoneNumber: "",
-                        email: "",
-                        githubProfile: "",
-                        description: "",
-                
+            educationHistory:
+            [
+                {
+                    institutionName: "",
+                    degree: "",
+                    yearCourseStarted: "",
+                    yearCourseEnded: "",
+                    courseDescription: "",
+                }
+            ],
+            
+            skills: [],
+
+            languages: [],
+    });
+
+
+    function handleChangeInput(e){
+        setUserDetails({...userDetails, [e.target.name]: e.target.value});
+    }
+
+    function handleChangeExperiencesAndEducation(e){
+        switch(e.target.className){
+            case "experiences":
+                setDetailsFor(e);
+                break;
+            case "educationHistory":
+                setDetailsFor(e);
+                break;
+            default:
+        }
+    }
+
+    function setDetailsFor(item){
+        let arr = [];
+
+        arr = userDetails.experiences;
+        arr[item.target.id][item.target.name] = item.target.value;
+        setUserDetails({...userDetails, [item.target.name]: arr});
+    }
+
+    function deleteFromList(e){
+        e.preventDefault();
+        let source = e.target.parentElement.parentElement.parentElement.children[0].name;
+
+        const list = getList(source);
+    
+        let updatedArr = [];
+    
+        for(let i = 0; i < list.length; i++){
+            if(list[i] === e.target.parentElement.children[0].textContent)continue;
+            updatedArr.push(list[i]);
+        }
+        setUserDetails({ ...userDetails, [source]: updatedArr});
+    }
+
+    function getList(source){
+        return source === "skills" ? userDetails.skills : userDetails.languages;
+    }
+
+    function addToList(e){
+        e.preventDefault();
+        let source = e.target.parentElement.children[0];
+        setUserDetails({...userDetails, [source.name]: userDetails[source.name].concat(source.value)});
+        source.value = "";
+    }
+
+    function addSection(e) {
+        e.preventDefault();
+
+        switch(e.target.name) {
+            case "addExperience":
+                setUserDetails({ ...userDetails, experiences: userDetails.experiences
+                    .concat({
                         position: "",
                         company: "",
                         yearJobStarted: "",
                         yearJobEnded: "",
                         jobDescription: "",
-                            
+                    })
+                });
+                break;
+
+            case "addEducation":
+                setUserDetails({...userDetails, educationHistory: userDetails.educationHistory
+                    .concat({
                         institutionName: "",
                         degree: "",
                         yearCourseStarted: "",
                         yearCourseEnded: "",
                         courseDescription: "",
-                       
-                        skills: [],
+                    })})
+                break;
 
-                        languages: [],
-                    }
+            default:     
+        }
     }
 
-    exampleOnclick = (e) =>{
+    function deleteSection(e){
         e.preventDefault();
-        this.setState({
-                        firstName: "Ada",
-                        lastName: "Lovelace",
-                        applicationTitle: "Senior Software Engineer",
-                        phoneNumber: "011 511 1115",
-                        email: "adalovelace@gmail.com",
-                        githubProfile: "github.com/AdaLovey",
-                        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim adminim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+        let array = [];
 
-                        position: "Senior Software Engineer",
-                        company: "Meta",
-                        yearJobStarted: "2018",
-                        yearJobEnded: "present",
-                        jobDescription: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-                            
-                        institutionName: "University of Design",
-                        degree: "Graphic design",
-                        yearCourseStarted: "2008",
-                        yearCourseEnded: "2013",
-                        courseDescription: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-                       
-                        skills: ["Good communicator", "Fast learner", "Competitive pizza eater"],
-
-                        languages: ["Java", "C", "Ruby", "Python"],
-        })
-    }    
-    
-    handleChangeInput = (e) =>{
-        this.setState({
-            [e.target.name]: e.target.value,
-        });
-    }
-
-    handleAdd = (e) =>{
-        e.preventDefault();
-        const target = e.target.parentElement.children[1];
-        const name = target.name;
+        switch(e.target.name){
+            case "deleteExperience":
+                for(let i = 0; i < userDetails.experiences.length; i++){
+                    if(i == e.target.id)continue;
         
-        this.setState({
-           [target.name]: this.state[name].concat(target.value)
-        })
-        target.value = "";
+                    array.push(userDetails.experiences[i]);
+                }
+                setUserDetails({ ...userDetails, experiences: array});
+                break;
+            case "deleteEducation":
+                for(let i = 0; i < userDetails.educationHistory.length; i++){
+                    if(i == e.target.id)continue;
+        
+                    array.push(userDetails.educationHistory[i]);
+                }
+                setUserDetails({ ...userDetails, educationHistory: array});
+                break;
+            default:
+        }
     }
-    
-    render(){
+
+    function displayExperiences(){
         return (
-            <div id="app-container">
-                <div id="form-container">
-                    <form id="cv-form">
-                        {this.personalInfoUI()}
-                        {this.experienceUI()}
-                        {this.educationUI()}
-                        {this.skillsUI()}
-                        {this.languagesUI()}
-                    </form>
-                    
-                    <button onClick={this.exampleOnclick}>Load example</button>
-                </div>
-                <CV cvInformation={this.state}/>
+            <div>
+                <ul className="form-list">
+                    {userDetails.experiences.map((experience, index) => {
+                        return (
+                            <div key={`formExperiences${index}`}>
+                                <li >{experienceUI(handleChangeExperiencesAndEducation, [index])}</li>
+                                {index !== 0 && <button className="remove-button" name = "deleteExperience" onClick = {deleteSection} id={index}>-</button>}    
+                            </div>
+                        )
+                    })}
+                </ul>
+                <button id="list-button" className="add-button" name="addExperience" onClick={addSection}>+</button>     
             </div>
-        );
+        )
     }
 
-    
-    
-    experienceUI(){
-        return(
-            <fieldset onFocus={styleFieldset} onBlur={removeStyleFieldset}>
-                <legend>Experience</legend>
-                <input type="text" placeholder="Position" name="position" onChange={this.handleChangeInput} value={this.state.position}></input>
-                <input type="text" placeholder="Company" name="company" onChange={this.handleChangeInput} value={this.state.company}></input>
-                <input type="text" placeholder="From" name="yearJobStarted" onChange={this.handleChangeInput} value={this.state.yearJobStarted}></input>
-                <input type="text" placeholder="To" name="yearJobEnded" onChange={this.handleChangeInput} value={this.state.yearJobEnded}></input>
-                <textarea placeholder="Describe your role" name="jobDescription" onChange={this.handleChangeInput} value={this.state.jobDescription}></textarea>
-            </fieldset> 
-        );
-    }
-    
-    educationUI(){
-        return(
-            <fieldset onFocus={styleFieldset} onBlur={removeStyleFieldset}>
-                <legend>Education</legend>
-                <input type="text" placeholder="Degree" name="degree" onChange={this.handleChangeInput} value={this.state.degree}></input>
-                <input type="text" placeholder="Institution's name" name="institutionName" onChange={this.handleChangeInput} value={this.state.institutionName}></input>
-                <input type="text" placeholder="Year started" name="yearCourseStarted" onChange={this.handleChangeInput} value={this.state.yearCourseStarted}></input>
-                <input type="text" placeholder="Year completed" name="yearCourseEnded" onChange={this.handleChangeInput} value={this.state.yearCourseEnded}></input>
-                <textarea placeholder="Describe what you learned" name="courseDescription" onChange={this.handleChangeInput} value={this.state.courseDescription}></textarea>
-            </fieldset>
-        );
-    }
-    
-    skillsUI(){
-        return(
-            <fieldset onFocus={styleFieldset} onBlur={removeStyleFieldset}>
-                <legend>Skills</legend>
-                <input type="text" name="skills" placeholder="Type skill then click add"></input>
-                <button onClick={this.handleAdd}>Add</button>
-            </fieldset>
-        );
+    function displayEducationHistory(){
+        return (
+            <div>
+                <ul className="form-list">
+                    {userDetails.educationHistory.map((education, index) => {
+                        return (
+                            <div key={`formEducationHistory${index}`}>
+                                <li>{educationUI(handleChangeExperiencesAndEducation, [index])}</li>
+                                {index !== 0 && <button className="remove-button" name="deleteEducation" onClick={deleteSection} id={index}>-</button>}
+                            </div>
+                        )
+                    })}
+                </ul>
+                <button id="list-button" className="add-button" name="addEducation" onClick={addSection}>+</button>           
+            </div>
+        )
     }
 
-    languagesUI(){
-        return(
-            <fieldset onFocus={styleFieldset} onBlur={removeStyleFieldset}>
-                <legend>Languages</legend>
-                <input type="text" name="languages" placeholder="Type language then click add"></input>
-                <button onClick={this.handleAdd}>Add</button>
-            </fieldset>
-        );
-    }
+    return (
+        <div id="app-container">
+            <div id="form-container">
+                <form id="cv-form">
+                    <h1>Personal Info</h1>
+                    {personalInfoUI(handleChangeInput)}
+                    <h1>Experience</h1>
+                    {displayExperiences()}
+                    <h1>Education</h1>
+                    {displayEducationHistory()}
+                    <h1>Languages</h1>
+                    {languagesUI(userDetails, addToList, deleteFromList)}
+                    <h1>Skills</h1>
+                    {skillsUI(userDetails, addToList, deleteFromList)}
+                </form>        
+            </div>
+        <CV cvDetails={userDetails}/>
+    </div>       
+    )
 }
 
-function personalInfoUI(personalDetails, handler){
+function personalInfoUI(handleChangeInput){
     return(
-        <fieldset onFocus={styleFieldset} onBlur={removeStyleFieldset}>
-            <legend>Personal Info</legend>
-            <input type="text" placeholder="First Name" name="firstName" onChange={handler} value={personalDetails.firstName}></input>
-            <input type="text" placeholder="Last Name" name="lastName" onChange={handler} value={personalDetails.lastName}></input>
-            <input type="text" placeholder="Applying for" name="applicationTitle" onChange={handler} value={personalDetails.applicationTitle}></input>
-            <input type="tel" placeholder="Phone number" name="phoneNumber" onChange={handler} value={personalDetails.phoneNumber}></input>
-            <input type="email" placeholder="Email" name="email" onChange={handler} value={personalDetails.email}></input>
-            <input type="url" placeholder="GitHub Profile" name="githubProfile" onChange={handler} value={personalDetails.githubProfile}></input>
-            <textarea placeholder="Tell your story. Try to keep it short!" name="description" onChange={handler} value={personalDetails.description}></textarea>
+        <fieldset>
+            <input type="text" placeholder="First Name" name="firstName" onChange={handleChangeInput}></input>
+            <input type="text" placeholder="Last Name" name="lastName" onChange={handleChangeInput}></input>
+            <input type="text" placeholder="Applying for" name="applicationTitle" onChange={handleChangeInput}></input>
+            <input type="tel" placeholder="Phone number" name="phoneNumber" onChange={handleChangeInput}></input>
+            <input type="email" placeholder="Email" name="email"onChange={handleChangeInput}></input>
+            <input type="url" placeholder="GitHub Profile" name="githubProfile" onChange={handleChangeInput}></input>
+            <textarea placeholder="Tell your story. Try to keep it short!" name="description" onChange={handleChangeInput}></textarea>
         </fieldset>
     );
 }
 
+function experienceUI(handler, index){
+    return(
+        <fieldset>
+            <input className="experiences" id={index} type="text" placeholder="Position" name="position" onChange={handler}></input>
+            <input className="experiences" id={index} type="text" placeholder="Company" name="company" onChange={handler}></input>
+            <input className="experiences" id={index} type="text" placeholder="From" name="yearJobStarted" onChange={handler}></input>
+            <input className="experiences" id={index} type="text" placeholder="To" name="yearJobEnded" onChange={handler}></input>
+            <textarea className="experiences" id={index} placeholder="Describe your role" name="jobDescription" onChange={handler}></textarea>
+        </fieldset> 
+    );
+}
 
+function educationUI(handler, index){
+    return(
+        <fieldset>
+            <input id={index} type="text" placeholder="Degree" name="degree" onChange={handler}></input>
+            <input id={index} type="text" placeholder="Institution's name" name="institutionName" onChange={handler}></input>
+            <input id={index} type="text" placeholder="Year started" name="yearCourseStarted" onChange={handler}></input>
+            <input id={index} type="text" placeholder="Year completed" name="yearCourseEnded" onChange={handler}></input>
+            <textarea id={index} placeholder="Describe what you learned" name="courseDescription" onChange={handler}></textarea>
+        </fieldset>
+    );
+}
 
-export {Form, Formf}
+function skillsUI(userDetails, addToList, removeFromList){
+    return (
+        <fieldset>
+            <input type="text" name="skills" placeholder="Enter skill"></input>
+            <button name="addSkills" onClick={addToList}>Enter</button>
+            <ul id="skills-list">
+                {userDetails.skills.map((skill, index) => {
+                    return (
+                        <li id="language-and-skill-list" key={`formSkills${index}` }>
+                        <p>{ skill }</p>
+                        <button name="removeSkills" className="remove-button" onClick={removeFromList}>-</button>
+                    </li>
+                    )
+                })}
+            </ul>
+        </fieldset>
+    )
+}
+
+function languagesUI(userDetails, addToList, removeFromList){
+    return(
+        <fieldset>
+            <input type="text" name="languages" placeholder="Enter language" id="language-input"></input>
+            <button name="addLanguages" onClick={addToList}>Enter</button>
+            <ul>
+                { userDetails.languages.map((language, index) => {
+                    return (
+                        <li id="language-and-skill-list" key={`formLanguages${index}`}>
+                            <p>{ language }</p>
+                            <button name="removeLanguages" className="remove-button" onClick={removeFromList}>-</button>
+                        </li>
+                    )  
+                })}
+            </ul>
+        </fieldset>
+    );
+}
+
+export {Form}
